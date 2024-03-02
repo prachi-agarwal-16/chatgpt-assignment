@@ -54,23 +54,21 @@ function App() {
             ) ?? -1;
 
           if (foundConversationIndex !== -1) {
-            parsedConversations.splice(foundConversationIndex, 1);
+            const updatedConversations = [...parsedConversations];
+            updatedConversations[foundConversationIndex] = {
+              id: currentConversationId,
+              conversation: [
+                ...conversation,
+                {
+                  user: "User",
+                  prompt,
+                  answer: randomAnswer.answer,
+                },
+              ],
+            };
             localStorage.setItem(
               "conversations",
-              JSON.stringify([
-                ...parsedConversations,
-                {
-                  id: currentConversationId,
-                  conversation: [
-                    ...conversation,
-                    {
-                      user: "User",
-                      prompt,
-                      answer: randomAnswer.answer,
-                    },
-                  ],
-                },
-              ])
+              JSON.stringify(updatedConversations)
             );
           }
         }
@@ -98,6 +96,7 @@ function App() {
     );
     if (foundConversation) {
       setConversation(foundConversation.conversation);
+      setCurrentConversationId(id);
     }
   };
 
