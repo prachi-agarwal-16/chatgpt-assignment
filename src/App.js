@@ -86,7 +86,7 @@ function App() {
         },
       ]);
       setPrompt("");
-    }, 5000);
+    }, 3000);
   };
 
   const handleSetConversation = (id) => {
